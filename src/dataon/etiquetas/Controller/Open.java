@@ -25,30 +25,32 @@ public class Open {
     public void OpenPort(String porta,int params, String caminho ) throws SerialPortException{
        
         SerialPort serial = new SerialPort(porta);
-
-        String ppla = lerppla(caminho);
-        String p = "";
-       // PrintWriter pr = new PrintWriter(ppla);
+        int qt = Integer.parseInt(PainelPrincipal.Quantidade.getValue().toString());
+        
+        
+        
+        
+       
         try{
-            PainelPrincipal.CampoLog.setText(" Abertura de porta: " + serial.openPort());
-            p = PainelPrincipal.CampoLog.getText();
-            PainelPrincipal.CampoLog.setText(p + "\n Lido os Parametros : Porta: " + porta + " Velocidade de BIts "+ params);
-            p = PainelPrincipal.CampoLog.getText();
-            //System.out.println("Params setted: " + serial.setParams(params, 8, 1, 0));
-            //pr.println(serial.writeByte(ppla.getBytes()));
+            
+            
+            String ppla = lerppla(caminho);
+            PainelPrincipal.CampoLog.setText(PainelPrincipal.CampoLog.getText()+" Abertura de porta: " + serial.openPort());
+            PainelPrincipal.CampoLog.setText(PainelPrincipal.CampoLog.getText()+"\n************************************************");
+            for(int i=0;i < qt;i++){
+            PainelPrincipal.CampoLog.setText(PainelPrincipal.CampoLog.getText()+ "\n Efetuando leitura dos Parametros : Porta: " + porta);
             serial.getLinesStatus();
+            PainelPrincipal.CampoLog.setText(PainelPrincipal.CampoLog.getText()+"\n Enviado para impressora");
+            serial.writeBytes(ppla.getBytes());
+            PainelPrincipal.CampoLog.setText(PainelPrincipal.CampoLog.getText()+"\n Imprimido "+(i+1) + " com sucesso!!");
+            PainelPrincipal.CampoLog.setText(PainelPrincipal.CampoLog.getText()+"\n************************************************");
+            }
+            PainelPrincipal.CampoLog.setText(PainelPrincipal.CampoLog.getText()+ "\n fechamento da porta: " + serial.closePort()+"\n\n");
             
-            
-            System.out.println(serial.writeBytes(ppla.getBytes()));
-            
-            PainelPrincipal.CampoLog.setText(p +"\n Enviado para impressora");
-            p = PainelPrincipal.CampoLog.getText();
-           // System.out.println("Port closed: " + serial.closePort());
-            PainelPrincipal.CampoLog.setText(p + "\n fechamento da porta: " + serial.closePort());
         }
         catch(SerialPortException e){
             
-            PainelPrincipal.CampoLog.setText(p + " "+e);
+            PainelPrincipal.CampoLog.setText(PainelPrincipal.CampoLog.getText()+ " "+e);
             //JOptionPane.showMessageDialog(null, e);
         }
         
