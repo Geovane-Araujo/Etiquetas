@@ -1,6 +1,7 @@
 
 package dataon.etiquetas;
 
+import dataon.etiquetas.Controller.Usb;
 import dataon.etiquetas.View.PainelPrincipal;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -42,5 +43,8 @@ public class DataOnEtiquetas {
         PainelPrincipal pn = new PainelPrincipal();
         pn.setVisible(true);
     }
+    
+         Usb u = new Usb();
+         
     
 }
